@@ -1,0 +1,125 @@
+@use "./styles/variables" as vars;
+@use "./styles/components" as comps;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+
+p {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+#root {
+    --background-clr-1:#ffffff;
+    --background-clr-2:#fdfdfd;
+    --background-clr-3: #ececec;
+    --clr-1:#000000;
+    --clr-2:#ffffff;
+    --clr-3:#ff932f;
+}
+
+.btn-1{
+    @include comps.bttn(vars.$clr-1,vars.$clr-2);
+}
+
+.nav-link{
+    color: vars.$clr-1;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+
+    &:hover{
+        cursor: pointer;
+        background-color: vars.$background-clr-3;
+    }
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    .searchbox {
+        width: 250px;
+        border-radius: 5px;
+        border: 1px solid;
+        padding: 0px 1rem;
+        outline: none;
+    }
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:1rem;
+
+    .feature-card{
+        display: grid;
+        place-items: center;
+        padding: 1rem;
+        border: 1px transparent solid;
+        border-radius: 10px;
+        transition: border 200ms ease-in;
+        
+        p{
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin: 1rem 0 0 0;
+        }
+
+        &:hover{
+            cursor: pointer;
+            border: 1px solid vars.$background-clr-3;
+        }
+    }
+}
