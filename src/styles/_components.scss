@@ -1,4 +1,4 @@
-@mixin bttn ($bgcolor,$textcolor){
+@mixin bttn ($bgcolor, $textcolor){
     border: 1px transparent solid;
     background-color: $bgcolor;
     color: $textcolor;

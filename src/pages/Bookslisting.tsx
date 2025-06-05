@@ -2,10 +2,10 @@ import styled from "styled-components"
 
 
 
-function Collegelisting() {
+function Bookslisting() {
   return (
     <div>Collegelisting</div>
   )
 }
 
-export default Collegelisting
+export default Bookslisting;

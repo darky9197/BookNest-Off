@@ -1,5 +1,5 @@
 import "react";
-import { FC } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -19,22 +19,30 @@ const NavbarContainer = styled.div`
 
   h1 {
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 900;
+    font-size: 2rem;
+    margin: 0;
   }
-`;
+`
 
-const Navbar: FC = () => {
+function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <NavbarContainer>
-      <h1>BookNest</h1>
-      <div className="d-flex gap-2">
-        <Link to="/Login" className="btn btn-dark">
-          Login
-        </Link>
-        <Link to="#" className="btn btn-dark">
-          Register
-        </Link>
-      </div>
+      <h1>BOOKNEST</h1>
+      {(isLoggedIn) ? 
+        <div className="d-flex gap-2">
+          <Link to="/Signin" className="btn btn-dark">
+            Login
+          </Link>
+          <Link to="/Signup" className="btn btn-dark">
+            Register
+          </Link>
+        </div> : 
+          <div className="d-flex gap-2">
+            
+        </div>
+        }
     </NavbarContainer>
   );
 };

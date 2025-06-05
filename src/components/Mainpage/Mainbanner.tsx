@@ -2,6 +2,7 @@ import styled from "styled-components";
 import TextField from '@mui/material/TextField';
 import searchresult from "../../assets/data/searchresult";
 import Autocomplete from '@mui/material/Autocomplete';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import girlwithbooks from "../../assets/girlwithbooks1.png";
 
 
@@ -60,7 +61,7 @@ function Mainbanner() {
                                 renderInput={(params) => <TextField {...params} label="Search your College" />}
                             />
 
-                            <button className="btn btn-dark">search</button>
+                            <button className="btn btn-dark"><SearchOutlinedIcon/></button>
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,15 @@
-
 import { TextField } from '@mui/material';
 import styled from 'styled-components';
 import welcomeImage from '../assets/Login_Welcoming.png'
+import { Link } from 'react-router-dom';
 
 const Pagecontainer = styled.section`
   min-height:100vh;
   background-color: #f5f5f5;
   padding: 3rem;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: grid;
+  place-items: center;
+  
 `
 
 const Gridcontainer = styled.div`
@@ -19,16 +19,12 @@ const Gridcontainer = styled.div`
   box-shadow: 1px 1px 10px #e0e0e0e0;
 
   .image-container {
-    position: relative;
-    display: grid;
-    place-items: center;
-    padding: 1rem;
+    display: flex;
     background: #e7e7e7;
+    overflow: hidden;
 
     img {
-      position: relative;
-      bottom: 0;
-      width: 100%;
+      object-fit: cover;
     }
   }
 `
@@ -42,7 +38,7 @@ const Form = styled.form`
   padding:2rem;
 `
 
-function SignupPage() {
+function Login() {
   return (
     <Pagecontainer>
       <Gridcontainer>
@@ -72,11 +68,11 @@ function SignupPage() {
           <a href="#"><p>Forgot Your Password?</p></a>
 
           <input type="submit" value="Sign In" className="sub-btn btn btn-primary" onSubmit={e => e.preventDefault()}/>
-          <p>Don't have an account? <a href="register.html">Register</a></p>
+          <p>Don't have an account? <Link to='/Signup'>Register</Link></p>
         </Form>
       </Gridcontainer>
     </Pagecontainer>
   )
 }
 
-export default SignupPage;
+export default Login;
