@@ -62,14 +62,15 @@ h6 {
 #root {
     --background-clr-1:#ffffff;
     --background-clr-2:#fdfdfd;
-    --background-clr-3: #ececec;
+    --background-clr-3: #f8f8f8;
     --clr-1:#000000;
     --clr-2:#ffffff;
-    --clr-3:#ff932f;
+    --clr-3:#e4e4e4;
+    --clr-4:#ff932f;
 }
 
 .btn-1{
-    @include comps.bttn(vars.$clr-1,vars.$clr-2);
+    @include comps.bttn(vars.$clr-2,vars.$clr-1);
 }
 
 .nav-link{
@@ -119,7 +120,7 @@ h6 {
 
         &:hover{
             cursor: pointer;
-            border: 1px solid vars.$background-clr-3;
+            border: 1px solid vars.$clr-3;
         }
     }
 }

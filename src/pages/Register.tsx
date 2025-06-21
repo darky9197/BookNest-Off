@@ -7,6 +7,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import { VisibilityOff } from '@mui/icons-material';
 
 import welcomeImage from '../assets/student_presenting.png'
+import axios from 'axios';
 
 const Pagecontainer = styled.section`
   min-height:100vh;
@@ -44,6 +45,14 @@ const Form = styled.form`
 `
 
 function Register() {
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    college_name: "",
+    college_code: "",
+    email: "",
+    mobile: "",
+    password: ""
+  })
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -56,58 +65,113 @@ function Register() {
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/user/addUser",
+        {
+          personal_data: {
+            ...registerData,
+            college_code: Number.parseInt(registerData.college_code)
+          },
+          account_data: {}
+        }
+      );
+      const data = response.data;
+      if (data.login) {
+        localStorage.setItem("userToken", JSON.stringify({ log: data.login, email: data.email }))
+        window.location.href = '/';
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Pagecontainer>
       <Gridcontainer>
         <div className='image-container'>
           <img src={welcomeImage} />
         </div>
-        <Form action="/userLogin" method="post">
+        <Form onSubmit={handleRegister}>
 
           <h1 className="log-header">Signup</h1>
 
           <TextField
-            id="outlined-password-input"
             label="Name"
             type="text"
             name='name'
+            value={registerData.name}
+            onChange={(e) => {
+              setRegisterData({
+                ...registerData,
+                name: e.target.value
+              })
+            }}
           />
 
           <TextField
-            id="outlined-password-input"
             label="College Name"
             type="text"
             name='college_name'
+            value={registerData.college_name}
+            onChange={(e) => {
+              setRegisterData({
+                ...registerData,
+                college_name: e.target.value
+              })
+            }}
           />
 
           <TextField
-            id="outlined-password-input"
             label="College Code"
             type="text"
             name='college_code'
             autoComplete="current-password"
+            value={registerData.college_code}
+            onChange={(e) => {
+              setRegisterData({
+                ...registerData,
+                college_code: e.target.value
+              })
+            }}
           />
 
           <TextField
-            id="outlined-password-input"
             label="Email"
             type="email"
             name='email'
             autoComplete="current-password"
+            value={registerData.email}
+            onChange={(e) => {
+              setRegisterData({
+                ...registerData,
+                email: e.target.value
+              })
+            }}
           />
 
           <TextField
-            id="outlined-password-input"
             label="Whatsapp Number"
             type="text"
             name='whatsapp_number'
             autoComplete="current-password"
+            value={registerData.mobile}
+            onChange={(e) => {
+              setRegisterData({
+                ...registerData,
+                mobile: e.target.value
+              })
+            }}
           />
 
           <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <InputLabel htmlFor="password">Password</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="password"
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -125,13 +189,20 @@ function Register() {
                 </InputAdornment>
               }
               label="Password"
+              value={registerData.password}
+              onChange={(e) => {
+                setRegisterData({
+                  ...registerData,
+                  password: e.target.value
+                })
+              }}
             />
           </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+          {/* <FormControl variant="outlined">
+            <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="confirm-password"
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -150,11 +221,10 @@ function Register() {
               }
               label="Confirm Password"
             />
-          </FormControl>
+          </FormControl> */}
 
-          <a href="#"><p>Forgot Your Password?</p></a>
 
-          <input type="submit" value="Sign up" className="sub-btn btn btn-primary" onSubmit={e => e.preventDefault()} />
+          <button type="submit" className="p-3 sub-btn btn btn-primary">Sign up</button>
           <p>Already have an account? <Link to='/Signin'>Signin</Link></p>
         </Form>
       </Gridcontainer>

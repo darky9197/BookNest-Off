@@ -4,6 +4,8 @@ import searchresult from "../../assets/data/searchresult";
 import Autocomplete from '@mui/material/Autocomplete';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import girlwithbooks from "../../assets/girlwithbooks1.png";
+import { useContext } from "react";
+import { ACTIONS ,AppContext } from "../../Contexts";
 
 
 const Bannercontainer = styled.div`
@@ -19,6 +21,8 @@ const Bannergrid = styled.div`
   box-shadow: #00000019 0px 4px 12px;
   grid-template-columns: repeat(2, 1fr);
   min-height: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--clr-3);
 
   .search-container{
     padding: 1rem;
@@ -46,6 +50,11 @@ const Bannerimage = styled.img`
 `;
 
 function Mainbanner() {
+
+
+    const { data } = useContext(AppContext);
+
+    console.log(data.search)
     return (
         <Bannercontainer>
             <Bannergrid>
@@ -59,9 +68,13 @@ function Mainbanner() {
                                 sx={{ width: 300 }}
                                 options={searchresult.map((option) => option.title)}
                                 renderInput={(params) => <TextField {...params} label="Search your College" />}
+                                value={data.searchValue}
+                                onChange={(event, newVal: string | null) => {
+                                    event.preventDefault();
+                                    data.dispatch({ type: ACTIONS.UPDATE_SEARCH, payload: { data: newVal } })
+                                }}
                             />
-
-                            <button className="btn btn-dark"><SearchOutlinedIcon/></button>
+                            <button className="btn btn-dark"><SearchOutlinedIcon /></button>
                         </div>
                     </div>
                 </div>
